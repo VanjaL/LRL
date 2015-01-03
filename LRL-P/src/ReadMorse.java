@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class ReadMorse {
 	private String letter;
+	private String word;
 	private ArrayList<String> message; 
 	
 	private String[] alphabet = {
@@ -56,7 +57,7 @@ public class ReadMorse {
 		LightSensor light = new LightSensor(SensorPort.S2);
 		int blinkLength = 0;
 		int dark = 0; 
-	    
+	    message = new ArrayList<String>(); 
 		
 		while (light.getLightValue() > 40)
 		{
@@ -112,7 +113,7 @@ public class ReadMorse {
 					// Get the letter/number from the code.
 					this.letter = decode(this.letter);
 					// Add it to the message.
-					message.add(this.letter);
+					word += this.letter;
 					// Set the variable to null so it can store new values from the beginning. 
 					this.letter = null;
 				}
@@ -123,9 +124,9 @@ public class ReadMorse {
 				
 			}
 			
-			// When it exits the outer loop, it means one word is over, so only add a space in the message. 
-			message.add(" "); 
-			
+			// When it exits the outer loop, it means one word is over, adds the word to the message only if the message had begun with "hello" or the word itself is "hello". 
+			if (message.get(0).equalsIgnoreCase("hello") || word.equalsIgnoreCase("hello"));
+				message.add(word);
 		}
 	}
 	
