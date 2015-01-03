@@ -56,7 +56,6 @@ public class FindLightSource
 		while(!(value < largest + 2 && value > largest - 2)) // Finding where was
 		{ // the largest value
 			MotorPort.B.controlMotor(75, 1); // Permitted +- 2 in value.
-			//Thread.sleep(1000);
 			value = light.getLightValue();
 
 		}
