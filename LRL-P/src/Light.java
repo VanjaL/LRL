@@ -28,13 +28,13 @@ public class Light
 		int largestValue = 0;
 		int secondLargest = 0;
 
-		for (int index = 0; index < lengths.size(); index++) // We first get the index of the longest blink
+		for (int index = 0; index < lengths.size(); index++) // First get the index of the longest blink
 		{
 			if (lengths.get(index) > lengths.get(largestValue))
 				largestValue = index;
 		}
 
-		for (int index = 0; index < lengths.size(); index++) // And than find the index of the second longest blink
+		for (int index = 0; index < lengths.size(); index++) // Find the index of the second longest blink
 		{
 			if (lengths.get(index) > lengths.get(secondLargest) && index != largestValue)
 				secondLargest = index;
