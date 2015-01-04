@@ -1,5 +1,6 @@
 import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
+import lejos.nxt.MotorPort;
 import lejos.nxt.SensorPort;
 
 import java.util.ArrayList;
@@ -142,6 +143,10 @@ public class ReadMorse {
 				}
 		}
 		
+		
+		//backUp(); 
+		//showMessage(this.message); 
+		
 		//Test
 		String messageString = null; 
 		for (int i = 0; i < message.size(); i++)
@@ -168,6 +173,38 @@ public class ReadMorse {
 				this. letter = numbers[i]; 	
 		}
 		return this.letter;
+	}
+	
+	private void backUp()
+	{
+		// Back up
+		MotorPort.B.resetTachoCount();
+		int tachoCount = MotorPort.B.getTachoCount();
+		
+		while (tachoCount < (50 * 360) / 17.27)
+		{
+			MotorPort.B.controlMotor(80, 2);
+			MotorPort.C.controlMotor(80, 2);
+			tachoCount = MotorPort.B.getTachoCount();
+		}
+
+		MotorPort.B.controlMotor(100, 3);
+		MotorPort.C.controlMotor(100, 3);
+	}
+	
+	private void showMessage(ArrayList<String> message) throws InterruptedException
+	{
+		for (int i = 0; i < message.size(); i++)
+		{
+			String word = message.get(i); 
+			for (int j = 0; j < word.length(); j++)
+			{
+				char letter = word.charAt(j); 
+				LCD.drawChar(letter, 1, 3);
+				Thread.sleep(2000);
+				
+			}
+		}
 	}
 	
 	public static void main(String[] args) throws InterruptedException
