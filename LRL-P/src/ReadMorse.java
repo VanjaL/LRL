@@ -1,3 +1,4 @@
+import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
 
@@ -68,7 +69,7 @@ public class ReadMorse {
 		// It looks at the blinks as long as the last word in an array list is not "goodbye"
 		while (!message.get(message.size() - 1).equalsIgnoreCase("goodbye"))
 		{
-			// For a word
+			// For a word, it stops when it gets to the pause between the words
 			while (light.getLightValue() < 40 && !(dark > 345 && dark < 355))
 		     { 
 				// For one letter
@@ -111,6 +112,11 @@ public class ReadMorse {
 				{
 					// Get the letter/number from the code.
 					this.letter = decode(this.letter);
+					
+					//Test
+					LCD.drawString(letter, 1, 1);
+					Thread.sleep(2000); 
+					
 					// Add it to the message.
 					word += this.letter;
 					// Set the variable to null so it can store new values from the beginning. 
@@ -126,10 +132,25 @@ public class ReadMorse {
 			// When it exits the outer loop, it means one word is over, adds the word to the message only if the message had begun with "hello" or the word itself is "hello". 
 			if (message.get(0).equalsIgnoreCase("hello") || word.equalsIgnoreCase("hello"));
 				{
+					// Test
+					LCD.drawString(word, 1, 1);
+					Thread.sleep(2000); 
+					
 					message.add(word);
+					// When it adds the String to the message, it resets to null to be sure it will next store all from the beginning. 
 					word = null;
 				}
 		}
+		
+		//Test
+		String messageString = null; 
+		for (int i = 0; i < message.size(); i++)
+		{
+			messageString += message.get(i).toString();
+		}
+		
+		LCD.drawString(messageString, 1, 1);
+		Thread.sleep(2000);
 	}
 	
 	// It loops through the array of codes for each letter and number and checks if it is the same as the String given.
@@ -147,5 +168,11 @@ public class ReadMorse {
 				this. letter = numbers[i]; 	
 		}
 		return this.letter;
+	}
+	
+	public static void main(String[] args) throws InterruptedException
+	{
+		ReadMorse code = new ReadMorse();
+		
 	}
 }
