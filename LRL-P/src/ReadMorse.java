@@ -210,6 +210,5 @@ public class ReadMorse {
 	public static void main(String[] args) throws InterruptedException
 	{
 		ReadMorse code = new ReadMorse();
-		
 	}
 }
