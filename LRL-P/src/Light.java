@@ -10,8 +10,8 @@ public class Light
 
 	public int getLargestValue() throws InterruptedException
 	{
-		int lvalue = 0; // variable which holds the duration of the longest blink
-		for (int index = 0; index < lengths.size(); index++) // Loops through the array list, searching for the largest value
+		int lvalue = 0; // Variable which holds the duration of the longest blink
+		for (int index = 0; index < lengths.size(); index++) // Loops through the array list, searches for the largest value
 		{
 			for (int i = 1; i < lengths.size(); i++)
 			{
@@ -71,9 +71,5 @@ public class Light
 		Thread.sleep(1000);
 	}
 
-/**	public static void main(String[] args) throws InterruptedException
-	{
-		Light c = new Light();
-		c.hardLengthValue();
-	} **/
+
 }

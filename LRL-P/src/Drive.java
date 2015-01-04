@@ -26,6 +26,7 @@ public class Drive
 			MotorPort.B.controlMotor(80, 1) ;
 			tachoCount = MotorPort.B.getTachoCount();
 		}
+		Thread.sleep(1000);
 	}
 
 	public void goForward() throws InterruptedException
@@ -45,14 +46,7 @@ public class Drive
 
 		MotorPort.B.controlMotor(100, 3);
 		MotorPort.C.controlMotor(100, 3);
-
+		Thread.sleep(1000);
 	}
-
-	/**public static void main(String[] args) throws InterruptedException
-{
-Drive drive = new Drive();
-//FindLightSource light = new FindLightSource();
-}**/
-
 
 }
