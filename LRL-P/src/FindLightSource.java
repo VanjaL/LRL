@@ -16,7 +16,7 @@ public class FindLightSource
 	{
 		values = new ArrayList<>();
 		sampleValues();
-		//findLargest();
+		findLargest();
 		driveToSource();
 	}
 
