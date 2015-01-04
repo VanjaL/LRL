@@ -68,7 +68,6 @@ public class ReadMorse {
 		// It looks at the blinks as long as the last word in an array list is not "goodbye"
 		while (!message.get(message.size() - 1).equalsIgnoreCase("goodbye"))
 		{
-			
 			// For a word
 			while (light.getLightValue() < 40 && !(dark > 345 && dark < 355))
 		     { 
@@ -126,7 +125,10 @@ public class ReadMorse {
 			
 			// When it exits the outer loop, it means one word is over, adds the word to the message only if the message had begun with "hello" or the word itself is "hello". 
 			if (message.get(0).equalsIgnoreCase("hello") || word.equalsIgnoreCase("hello"));
-				message.add(word);
+				{
+					message.add(word);
+					word = null;
+				}
 		}
 	}
 	
