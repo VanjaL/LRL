@@ -11,7 +11,7 @@ public class MorseEncoder
 
 	private MorseAlphabet code;	
 	private int[] signalCode = new int[10];
-	private LightSensor senderLed = new LightSensor(SensorPort.S3);
+	private LightSensor senderLed = new LightSensor(SensorPort.S2);
 	
 	public MorseEncoder()
 	{
