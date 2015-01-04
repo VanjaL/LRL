@@ -18,7 +18,10 @@ public class Drive
 		int largest = light.getLargestValue();
 		MotorPort.B.resetTachoCount();
 		int tachoCount = MotorPort.B.getTachoCount();
-		while (tachoCount < largest/2 )
+		
+		// circumference of the circle which robot makes when it spins = 85 (2*13.5*Math.PI)
+		// circumference of the wheel = 17,27
+		while (tachoCount < (85*(largest/1000) * 100) / (360*17.27) )
 		{
 			MotorPort.B.controlMotor(80, 1) ;
 			tachoCount = MotorPort.B.getTachoCount();
@@ -30,7 +33,10 @@ public class Drive
 		int second = light.getSecondLargestValue();
 		MotorPort.B.resetTachoCount();
 		int tachoCount = MotorPort.B.getTachoCount();
-		while (tachoCount < second*2)
+		
+		// Because the time is miliseconds,it first converts it to seconds
+		// Times 100 (said in the assignment)
+		while (tachoCount < ((second/1000)* 100 * 360) / 17.27)
 		{
 			MotorPort.B.controlMotor(80, 1);
 			MotorPort.C.controlMotor(80, 1);
