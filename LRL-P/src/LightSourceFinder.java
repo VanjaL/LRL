@@ -6,21 +6,14 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
 
 
-public class FindLightSource
+public class LightSourceFinder
 {
 
-	private ArrayList<Integer> values;
+	private ArrayList<Integer> values = new ArrayList<>();
 	private int largest;
 
-	public FindLightSource() throws InterruptedException
-	{
-		values = new ArrayList<>();
-		sampleValues();
-		findLargest();
-		driveToSource();
-	}
-
-	public void sampleValues() throws InterruptedException // Sample the light values around itself.
+	// Sample the light values around itself.
+	public void sampleValues() throws InterruptedException
 	{
 		LightSensor light = new LightSensor(SensorPort.S2);
 		MotorPort.B.resetTachoCount();
@@ -37,7 +30,8 @@ public class FindLightSource
 		}
 	}
 
-	public int findLargest() // Finds the largest value in the array list.
+	// Finds the largest value in the array list.
+	public int findLargest()
 	{
 		largest = 0;
 		for (int x = 0; x < values.size(); x++) 
@@ -49,7 +43,8 @@ public class FindLightSource
 		return values.get(largest);
 	}
 
-	public void driveToSource() throws InterruptedException // Finds and drives.
+	// Finds and drives.
+	public void driveToSource() throws InterruptedException
 	{
 		UltrasonicSensor ultra = new UltrasonicSensor(SensorPort.S4);
 		LightSensor light = new LightSensor(SensorPort.S2);

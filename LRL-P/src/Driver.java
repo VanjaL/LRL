@@ -1,18 +1,21 @@
 import java.util.ArrayList;
 
-import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.SensorPort;
 
 
-public class Drive 
+public class Driver 
 {
+
 	private ArrayList<Integer> lengths = new ArrayList<>(); // An array list of blinks' length
+	private final double CIRCUMFERENCE = (2*5.6*Math.PI);   // Circumference of the wheel
 	
+	
+	// Gets the largest value from the ArrayList lengths 
 	public int getLargestValue() throws InterruptedException
 	{
-		int lvalue = 0; // Variable which holds the duration of the longest blink
+		int lvalue = 0; 									// Variable which holds the duration of the longest blink
 		for (int index = 0; index < lengths.size(); index++) // Loops through the array list, searches for the largest value
 		{
 			for (int i = 1; i < lengths.size(); i++)
@@ -24,7 +27,8 @@ public class Drive
 
 		return lvalue;
 	}
-
+	
+	// Gets the second largest value
 	public int getSecondLargestValue() throws InterruptedException
 	{
 		int largestValue = 0;
@@ -36,7 +40,7 @@ public class Drive
 				largestValue = index;
 		}
 
-		for (int index = 0; index < lengths.size(); index++) // Find the index of the second longest blink
+		for (int index = 0; index < lengths.size(); index++) // Then find the index of the second longest blink
 		{
 			if (lengths.get(index) > lengths.get(secondLargest) && index != largestValue)
 				secondLargest = index;
@@ -44,7 +48,7 @@ public class Drive
 		return lengths.get(secondLargest);
 	}
 
-
+	// Reads the lengths of blinks
 	public void hardLengthValue() throws InterruptedException
 	{
 		LightSensor light = new LightSensor(SensorPort.S2);
@@ -74,13 +78,13 @@ public class Drive
 
      public void turn() throws InterruptedException // Turn clockwise.
 	{
-		int largest = this.getLargestValue();
+		double largest = this.getLargestValue()/10;
 		MotorPort.B.resetTachoCount();
 		int tachoCount = MotorPort.B.getTachoCount();
-		
+		double distance = (CIRCUMFERENCE / 360) *largest;
 		// circumference of the circle which robot makes when it spins = 85 (2*13.5*Math.PI)
 		// circumference of the wheel = 17,27
-		while (tachoCount < largest/10)
+		while (tachoCount < distance)
 		{
 			MotorPort.B.controlMotor(75, 1);
 			MotorPort.C.controlMotor(100, 3);
@@ -91,17 +95,18 @@ public class Drive
 
 	public void goForward() throws InterruptedException
 	{
-		int second = this.getSecondLargestValue();
+		double second = this.getSecondLargestValue()/10; // Divided by 1000 = seconds, times a 100 = assignment
 		MotorPort.B.resetTachoCount();
-		int tachoCount = MotorPort.B.getTachoCount();
+		double tachoCount = MotorPort.B.getTachoCount();
+		double distance = (second/CIRCUMFERENCE)*360;
+		while (tachoCount < distance)
 		
-		while (tachoCount < second/10) // Time converted to seconds*100
 		{
 			MotorPort.B.controlMotor(80, 1);
 			MotorPort.C.controlMotor(83, 1);
 			tachoCount = MotorPort.B.getTachoCount();
 		}
-
+		
 		MotorPort.B.controlMotor(100, 3);
 		MotorPort.C.controlMotor(100, 3);
 		Thread.sleep(1000);

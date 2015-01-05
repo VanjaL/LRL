@@ -1,14 +1,19 @@
 
+
+
 public class Controller
 {
 	public static void main(String[] args) throws InterruptedException
 	{
-		Drive driver = new Drive();
-		driver.hardLengthValue();
+		Driver drive = new Driver();
+		drive.hardLengthValue();
 		Thread.sleep(1000);
-		driver.turn();
-		driver.goForward();
+		drive.turn();
+		drive.goForward();
 				
-		FindLightSource finder = new FindLightSource();
+		LightSourceFinder finder = new LightSourceFinder();
+		finder.sampleValues();
+		finder.findLargest();
+		finder.driveToSource();
 	}
 }
