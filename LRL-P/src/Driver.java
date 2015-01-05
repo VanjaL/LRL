@@ -11,7 +11,35 @@ public class Driver
 	private ArrayList<Integer> lengths = new ArrayList<>(); // An array list of blinks' length
 	private final double CIRCUMFERENCE = (2*5.6*Math.PI);   // Circumference of the wheel
 	
-	
+	// Reads the lengths of blinks
+		public void hardLengthValue() throws InterruptedException
+		{
+			LightSensor light = new LightSensor(SensorPort.S2);
+			light.setFloodlight(false);
+			int counter = 0;
+
+			while (lengths.size() < 15)
+			{
+				while (light.getLightValue() < 40) // Robot waits for blinking to start
+				{
+					Thread.sleep(1);
+				}
+
+				Thread.sleep(1);				// Start counting blink length
+				counter++;
+
+				if (light.getLightValue() < 40) // If the blinking stops add the counter and proceed
+				{
+					lengths.add(counter);
+					counter = 0;
+					Thread.sleep(1);
+				}
+
+			}
+
+		}
+
+
 	// Gets the largest value from the ArrayList lengths 
 	public int getLargestValue() throws InterruptedException
 	{
@@ -48,35 +76,7 @@ public class Driver
 		return lengths.get(secondLargest);
 	}
 
-	// Reads the lengths of blinks
-	public void hardLengthValue() throws InterruptedException
-	{
-		LightSensor light = new LightSensor(SensorPort.S2);
-		light.setFloodlight(false);
-		int counter = 0;
-
-		while (lengths.size() < 15)
-		{
-			while (light.getLightValue() < 40) // Robot waits for blinking to start
-			{
-				Thread.sleep(1);
-			}
-
-			Thread.sleep(1);				// Start counting blink length
-			counter++;
-
-			if (light.getLightValue() < 40) // If the blinking stops add the counter and proceed
-			{
-				lengths.add(counter);
-				counter = 0;
-				Thread.sleep(1);
-			}
-
-		}
-
-	}
-
-     public void turn() throws InterruptedException // Turn clockwise.
+	     public void turn() throws InterruptedException // Turn clockwise.
 	{
 		double largest = this.getLargestValue()/10;
 		MotorPort.B.resetTachoCount();
