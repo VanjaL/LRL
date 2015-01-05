@@ -90,6 +90,7 @@ public class Driver
 			MotorPort.C.controlMotor(100, 3);
 			tachoCount = MotorPort.B.getTachoCount();
 		}
+		
 		Thread.sleep(1000);
 	}
 
