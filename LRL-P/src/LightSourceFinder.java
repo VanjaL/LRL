@@ -23,7 +23,7 @@ public class LightSourceFinder
 		{
 			MotorPort.B.controlMotor(75, 1);
 			MotorPort.C.controlMotor(100, 3);
-			Thread.sleep(1500);
+			Thread.sleep(500);
 			value = light.getLightValue();
 			values.add(value);
 			tachoCount = MotorPort.B.getTachoCount();

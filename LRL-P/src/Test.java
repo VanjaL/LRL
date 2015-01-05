@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import lejos.nxt.LCD;
 import lejos.nxt.LightSensor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.Sound;
 
 public class Test {
 	public static void main(String[] args) throws InterruptedException
