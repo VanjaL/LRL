@@ -9,7 +9,7 @@ public class Driver
 {
 
 	private ArrayList<Integer> lengths = new ArrayList<>(); // An array list of blinks' length
-	private final double CIRCUMFERENCE = (2*5.6*Math.PI);   // Circumference of the wheel
+	private final double CIRCUMFERENCE = (5.6*Math.PI);   // Circumference of the wheel
 	
 	// Reads the lengths of blinks
 		public void hardLengthValue() throws InterruptedException
@@ -110,6 +110,23 @@ public class Driver
 		MotorPort.B.controlMotor(100, 3);
 		MotorPort.C.controlMotor(100, 3);
 		Thread.sleep(1000);
+	}
+	
+	public void backUp()
+	{
+		MotorPort.B.resetTachoCount();
+		int tachoCount = MotorPort.B.getTachoCount();
+		
+		while (tachoCount > -(50/CIRCUMFERENCE)*360)
+		{
+			MotorPort.B.controlMotor(80, 2);
+			MotorPort.C.controlMotor(83, 2);
+			tachoCount = MotorPort.B.getTachoCount();
+		}
+		
+		MotorPort.B.resetTachoCount();
+		MotorPort.B.controlMotor(100, 3);
+		MotorPort.C.controlMotor(100, 3);
 	}
 
 }

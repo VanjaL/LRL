@@ -1,13 +1,10 @@
 
-
-
 public class Controller
 {
 	public static void main(String[] args) throws InterruptedException
 	{
 		Driver drive = new Driver();
 		drive.hardLengthValue();
-		Thread.sleep(1000);
 		drive.turn();
 		drive.goForward();
 				
@@ -16,6 +13,9 @@ public class Controller
 		finder.findLargest();
 		finder.driveToSource();
 		
-		
+		MorseReader reader = new MorseReader();
+		reader.read();
+		drive.backUp();
+		reader.beep();
 	}
 }

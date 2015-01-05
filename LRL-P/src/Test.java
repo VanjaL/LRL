@@ -71,27 +71,27 @@ public class Test {
 		{
 			// Between words
 			while (dark < 350)
+			{dark = 0;
+
+			//Between parts of a letter
+			while(dark < 50)
 			{
-				dark = 0;
-
-				//Between part of a letter
-				while(dark < 155)
+				dark++;	
+				Thread.sleep(1); 
+	
+				while (light.getLightValue() >= 45)
 				{
-					dark = 0;
-					while(light.getLightValue() < 40)
+					Thread.sleep(1);
+					blinkLength ++;
+					
+					if(light.getLightValue() < 45)
 					{
-						Thread.sleep(1); 
-						dark ++;
+						blinks.add(blinkLength);
+						blinkLength = 0;
+						dark = 0;
 					}
-
-					while (light.getLightValue() >= 45)
-					{
-						Thread.sleep(1);
-						blinkLength ++;
-
-					}
-					blinks.add(blinkLength);
-					blinkLength = 0;
+				}
+				
 
 				}
 
